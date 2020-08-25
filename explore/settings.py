@@ -14,7 +14,7 @@ from pathlib import Path
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # Quick-start development settings - unsuitable for production
@@ -93,11 +93,12 @@ if 'RDS_HOSTNAME' in os.environ:
 else:
     DATABASES = {
         'default': {
-            'NAME': 'explore2',
+            'NAME': 'data',
             'ENGINE': 'django.db.backends.mysql',
-            'USER': 'root',
-            'PASSWORD': 'mysql',
-            'PORT': '6603',
+            'USER': 'admin',
+            'PASSWORD': 'FFjwzhflqe7ZG4BJxphp',
+            'PORT': '3306',
+            'HOST': 'database-1.cndlbqj29lrm.us-west-2.rds.amazonaws.com',
             'OPTIONS': {
                 'autocommit': True,
             },
@@ -141,7 +142,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
 
 GRAPHENE = {
     'SCHEMA': 'explore.schema.schema'  # Where your Graphene schema lives
